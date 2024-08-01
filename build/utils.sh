@@ -44,6 +44,9 @@ architecture() {
         s390x-unknown-linux-gnu)
             echo s390x
             ;;
+        riscv64gc-unknown-linux-gnu)
+            echo riscv64
+            ;;
         *)
             die "architecture: unexpected target $TARGET"
             ;;
@@ -64,6 +67,8 @@ gcc_prefix() {
         s390x)
             echo s390x-linux-gnu-
 	        ;;
+        riscv64)
+            echo riscv64-linux-gnu-
         *)
             return
             ;;
@@ -129,6 +134,13 @@ is_ppc64le() {
 is_s390x() {
     case "$(architecture)" in
         s390x) return 0 ;;
+        *)     return 1 ;;
+    esac
+}
+
+is_riscv64() {
+    case "$(architecture)" in
+        riscv64) return 0 ;;
         *)     return 1 ;;
     esac
 }
